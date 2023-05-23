@@ -5,33 +5,54 @@ using UnityEngine;
 public class TastBotLogic : MonoBehaviour
 {
     [Space]
-    [SerializeField] private Vector2 SizePatrol;
+    [Header("State")]
+    [SerializeField]private State StartState;
+    [SerializeField]private State Patrul;
+    [SerializeField]private State Agressive;
+    [SerializeField]private State curentState;
 
     [Space]
-    [SerializeField] private bool Patrol;
+    public Transform Target;
 
     [Space]
-    [SerializeField] private Transform Target;
+    private List<GameObject> _purposes = new();
+    public GameObject purpose{get;private set;}
 
-    [Space]
-    [SerializeField] private float MinDistansTarget;
-
-    private Transform _Tr;
-
+    public Transform _Tr;
     private void Start()
     {
         _Tr = transform;
+        SetState(StartState);
     }
 
     void Update()
     {
-        if((Target.position - _Tr.position).magnitude <= MinDistansTarget && Patrol)
+        if(!curentState.IsFinished)
         {
-            Target.position = new Vector3
-                (
-                Random.RandomRange(-SizePatrol.x, SizePatrol.x),
-                Random.RandomRange(-SizePatrol.y, SizePatrol.y)
-                );
+            curentState.Run();
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
+        if(other.CompareTag("Player"))
+        {
+            _purposes.Add(other.gameObject);
+            purpose = _purposes[0];
+            SetState(Agressive);
+        }    
+    }
+    private void OnTriggerExit2D(Collider2D other) 
+    {
+        if(other.CompareTag("Player"))
+        {
+            SetState(Patrul);
+        }    
+    }
+   private void SetState(State state)
+   {
+        curentState = Instantiate(state);
+        curentState.Bot = this;
+        curentState.Init();
+   }
 }

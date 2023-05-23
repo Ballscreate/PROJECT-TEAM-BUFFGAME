@@ -3081,6 +3081,27 @@ Transform:
   m_Father: {fileID: 720449857}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &714933162 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2588132364848392480, guid: ac2492d19c3a0fa49b4b82658fa916ae, type: 3}
+  m_PrefabInstance: {fileID: 2588132364851525839}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &714933167
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714933162}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 10
 --- !u!1 &720449856
 GameObject:
   m_ObjectHideFlags: 0
@@ -8418,6 +8439,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 423390261324822687, guid: 6554d6ff90249294b880c6c6feb41fe4, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 423390261584720634, guid: 6554d6ff90249294b880c6c6feb41fe4, type: 3}
       propertyPath: far clip plane
       value: 1000
@@ -8526,6 +8551,34 @@ PrefabInstance:
     - target: {fileID: 2588132364405834248, guid: ac2492d19c3a0fa49b4b82658fa916ae, type: 3}
       propertyPath: m_Name
       value: Unit Bot
+      objectReference: {fileID: 0}
+    - target: {fileID: 2588132364848392508, guid: ac2492d19c3a0fa49b4b82658fa916ae, type: 3}
+      propertyPath: Patrol
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2588132364848392508, guid: ac2492d19c3a0fa49b4b82658fa916ae, type: 3}
+      propertyPath: Patrul
+      value: 
+      objectReference: {fileID: 11400000, guid: 63851af677d453345bd05084d7778c82, type: 2}
+    - target: {fileID: 2588132364848392508, guid: ac2492d19c3a0fa49b4b82658fa916ae, type: 3}
+      propertyPath: Agressive
+      value: 
+      objectReference: {fileID: 11400000, guid: 233e557ac003da143a00dd0fb9f8eaf7, type: 2}
+    - target: {fileID: 2588132364848392508, guid: ac2492d19c3a0fa49b4b82658fa916ae, type: 3}
+      propertyPath: StartState
+      value: 
+      objectReference: {fileID: 11400000, guid: 63851af677d453345bd05084d7778c82, type: 2}
+    - target: {fileID: 2588132364848392508, guid: ac2492d19c3a0fa49b4b82658fa916ae, type: 3}
+      propertyPath: MinDistansAttack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2588132364848392510, guid: ac2492d19c3a0fa49b4b82658fa916ae, type: 3}
+      propertyPath: m_LinearDrag
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2588132364848392510, guid: ac2492d19c3a0fa49b4b82658fa916ae, type: 3}
+      propertyPath: m_AngularDrag
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac2492d19c3a0fa49b4b82658fa916ae, type: 3}
