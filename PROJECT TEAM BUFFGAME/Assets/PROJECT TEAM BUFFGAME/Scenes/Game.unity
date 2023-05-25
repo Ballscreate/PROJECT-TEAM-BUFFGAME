@@ -7763,6 +7763,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &1958553529 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2588132363341892032, guid: ac2492d19c3a0fa49b4b82658fa916ae, type: 3}
+  m_PrefabInstance: {fileID: 2588132364851525839}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1959658970
 GameObject:
   m_ObjectHideFlags: 0
@@ -8495,6 +8500,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 423390262434222535, guid: 6554d6ff90249294b880c6c6feb41fe4, type: 3}
+      propertyPath: senseti
+      value: -0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6554d6ff90249294b880c6c6feb41fe4, type: 3}
 --- !u!1001 &2588132364851525839
@@ -8552,6 +8561,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Unit Bot
       objectReference: {fileID: 0}
+    - target: {fileID: 2588132364848392508, guid: ac2492d19c3a0fa49b4b82658fa916ae, type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 1958553529}
     - target: {fileID: 2588132364848392508, guid: ac2492d19c3a0fa49b4b82658fa916ae, type: 3}
       propertyPath: Patrol
       value: 0

@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public abstract class State : ScriptableObject
+public abstract class State 
 {
-    public bool IsFinished{get;protected set;}
-    [HideInInspector] public TastBotLogic Bot;
+    protected readonly StateMachine stateMachine;
 
-    public virtual void Init() {}
+    public State(StateMachine stateMachine)
+    {
+       this.stateMachine = stateMachine;
+    }
 
-    public abstract void Run();
+    public virtual void Enter(){}
+    public virtual void Exit(){}
+    public virtual void Update(){}
 }

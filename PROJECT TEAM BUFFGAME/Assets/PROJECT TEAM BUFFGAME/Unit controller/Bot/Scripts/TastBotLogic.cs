@@ -6,31 +6,33 @@ public class TastBotLogic : MonoBehaviour
 {
     [Space]
     [Header("State")]
-    [SerializeField]private State StartState;
-    [SerializeField]private State Patrul;
-    [SerializeField]private State Agressive;
-    [SerializeField]private State curentState;
+    private StateMachine stateMachine;
 
     [Space]
-    public Transform Target;
+    [SerializeField]private Transform Target;
+    private Transform _Tr;
 
     [Space]
     private List<GameObject> _purposes = new();
-    public GameObject purpose{get;private set;}
+    private GameObject purpose{get;set;}
 
-    public Transform _Tr;
+
+    [SerializeField] private float MinDistansTarget;
+
+    [SerializeField] private Vector2 SizePatrol;
     private void Start()
     {
         _Tr = transform;
-        SetState(StartState);
+        stateMachine = new StateMachine();
+
+        stateMachine.AddState(new StatePatrul(stateMachine,Target,_Tr,SizePatrol,MinDistansTarget));
+
+        stateMachine.SetState<StatePatrul>();
     }
 
     void Update()
     {
-        if(!curentState.IsFinished)
-        {
-            curentState.Run();
-        }
+      stateMachine.Update();
     }
 
     private void OnTriggerEnter2D(Collider2D other) 
@@ -39,20 +41,17 @@ public class TastBotLogic : MonoBehaviour
         {
             _purposes.Add(other.gameObject);
             purpose = _purposes[0];
-            SetState(Agressive);
+            
+            stateMachine.AddState(new StateAggression(stateMachine,Target,_Tr, purpose.transform));
+            stateMachine.SetState<StateAggression>();
         }    
     }
     private void OnTriggerExit2D(Collider2D other) 
     {
         if(other.CompareTag("Player"))
         {
-            SetState(Patrul);
+           stateMachine.SetState<StatePatrul>();
         }    
     }
-   private void SetState(State state)
-   {
-        curentState = Instantiate(state);
-        curentState.Bot = this;
-        curentState.Init();
-   }
+
 }
