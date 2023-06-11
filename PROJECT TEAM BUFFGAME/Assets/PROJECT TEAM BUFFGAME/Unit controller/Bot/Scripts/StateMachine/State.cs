@@ -7,9 +7,7 @@ public abstract class State
        this.stateMachine = stateMachine;
     }
 
-    public virtual void Enter() => UnityEngine.Debug.Log($"Enter {this.GetType().Name}");
-   
-    public virtual void Exit() => UnityEngine.Debug.Log($"Exit {this.GetType().Name}");
-   
+    public virtual void Enter(){}
+    public virtual void Exit(){}
     public virtual void Update(){}
 }

@@ -1,66 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class TastBotLogic : MonoBehaviour
 {
+    [Space]
     [Header("State")]
-    protected StateMachine stateMachine;
+    private StateMachine stateMachine;
 
-    [Header("Transform/Point")]
-    [SerializeField]protected Transform Target;
-    protected Transform _Tr;
+    [Space]
+    [SerializeField]private Transform Target;
+    private Transform _Tr;
 
-    [Header("GameObject")]
-    protected List<GameObject> _purposes = new();
-    protected GameObject Purpose{get;set;}
-
-    [Header("Other Variables")]
-    [SerializeField] protected float MinDistansTarget;
-    [SerializeField] protected float MinDistansAttack;
-    [SerializeField] protected Vector2 SizePatrol;
-    public float _distant;
-    protected TastBotLogic _botScript;
+    [Space]
+    private List<GameObject> _purposes = new();
+    private GameObject purpose{get;set;}
 
 
-    protected void TastBotLogicStart()
+    [SerializeField] private float MinDistansTarget;
+
+    [SerializeField] private Vector2 SizePatrol;
+    private void Start()
     {
-        _botScript = this;
         _Tr = transform;
         stateMachine = new StateMachine();
 
-        stateMachine.AddState(new StatePatrul(stateMachine,Target,_Tr));
+        stateMachine.AddState(new StatePatrul(stateMachine,Target,_Tr,SizePatrol,MinDistansTarget));
+
         stateMachine.SetState<StatePatrul>();
     }
 
-   protected void TastBotLogicUpdate()
+    void Update()
     {
-        if(Purpose != null)
-        {
-            _distant = Vector3.Distance(Purpose.transform.position,_Tr.position);
-        }
-        stateMachine.Update();
+      stateMachine.Update();
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D other) 
+    private void OnTriggerEnter2D(Collider2D other) 
     {
         if(other.CompareTag("Player"))
         {
             _purposes.Add(other.gameObject);
-            Purpose = _purposes[0];
+            purpose = _purposes[0];
             
-            stateMachine.AddState(new StateAggression(stateMachine,Target,_Tr, Purpose.transform,_botScript,MinDistansAttack));
+            stateMachine.AddState(new StateAggression(stateMachine,Target,_Tr, purpose.transform));
             stateMachine.SetState<StateAggression>();
         }    
     }
-    protected virtual void OnTriggerExit2D(Collider2D other) 
+    private void OnTriggerExit2D(Collider2D other) 
     {
         if(other.CompareTag("Player"))
         {
            stateMachine.SetState<StatePatrul>();
         }    
     }
-    
 
 }
