@@ -23,7 +23,7 @@ public class UnitController : MonoBehaviour
     private Transform _unit;
 
 
-    [HideInInspector] // поле сереализовано но скрыто в инспектре
+    [HideInInspector] // поле сереализовано но скрыто в инспекторе
     public float
         // наклон вектора до цели (мышки) или (таргета) от  pi   до   -pi
         radian;
@@ -59,14 +59,14 @@ public class UnitController : MonoBehaviour
 
         angleCalculation();
 
-        unityRotation();
+        unitRotation();
 
         itemRotation();
     }
 
     private void navMove()
     {
-        if(_currentTarget.x != target.x || _currentTarget.y != target.y)
+        if (_currentTarget.x != target.x || _currentTarget.y != target.y)
         {
             _currentTarget = target;
             NavMesh.SetDestination(target);
@@ -92,14 +92,14 @@ public class UnitController : MonoBehaviour
             Mathf.Cos(radian * 0.5f));
     }
 
-    private void unityRotation()
+    private void unitRotation()
     {
-        // сдесь нужен лишь модуль, он сновиться не верный при наложении + и + или - и - модуль числа инвертируеться и увиличиваеться (больше пи)
+        // здесь нужен лишь модуль, он становится не верным при наложении + и + или - и - модуль числа инвертируется и увиличивается (больше pi)
         if (Mathf.Abs(_offsetRadian) > Mathf.PI)
         {
             _offsetRadian = _offsetRadian * -1;
         }
-        // ^^^^ эта костыль иза неправельного округления float есть "зазоры", периуды где не правельно работает модуль
+        // ^^^^ это костыль из-за неправильного округления float есть "зазоры", периуды где не правильно работает модуль
 
         if (_offsetRadian > maxTurningAngle)
         {
