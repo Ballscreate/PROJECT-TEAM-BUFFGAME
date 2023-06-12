@@ -9,7 +9,7 @@ public class StateMachine
 
     public void AddState(State state)
     {
-        if(!_states.TryGetValue(state.GetType(),out var newState))     
+        if(!_states.ContainsKey(state.GetType()))     
         {   
         _states.Add(state.GetType(),state);
         }
