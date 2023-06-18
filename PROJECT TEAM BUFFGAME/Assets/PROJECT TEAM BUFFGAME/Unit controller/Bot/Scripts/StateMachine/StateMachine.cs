@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Mirror;
 
 public class StateMachine 
 {
@@ -30,6 +31,7 @@ public class StateMachine
             StateCurrent.Enter();
         }
     }
+  
     public void Update()
     {
         StateCurrent?.Update();

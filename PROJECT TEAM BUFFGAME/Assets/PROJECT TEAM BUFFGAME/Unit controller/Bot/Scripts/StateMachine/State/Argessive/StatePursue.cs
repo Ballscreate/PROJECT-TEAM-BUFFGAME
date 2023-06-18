@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class StatePursue : State
 {
@@ -20,11 +21,13 @@ public class StatePursue : State
         this.bot = bot;
         this.MinDistansAttack = MinDistansAttack;
      }
+
     public override void Update()
     {
         if(bot._distant <= MinDistansAttack) stateMachine.SetState<StateAggression>();
         else Pursue();
     }
+    
     void Pursue()
     {
          _controller.target = purpose.position;

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
-public class UnitController : MonoBehaviour
+using Mirror;
+public class UnitController : NetworkBehaviour
 {
     [Space]
     public Transform Item;
@@ -55,6 +56,8 @@ public class UnitController : MonoBehaviour
 
     private void Update()
     {
+        if(isLocalPlayer || isServer && NetworkClient.isHostClient )
+        {
         navMove();
 
         angleCalculation();
@@ -62,6 +65,7 @@ public class UnitController : MonoBehaviour
         unitRotation();
 
         itemRotation();
+        }
     }
 
     private void navMove()

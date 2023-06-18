@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class SearchState : State
 {
@@ -16,13 +17,17 @@ public class SearchState : State
         this._controller = _controller;
         this._Tr = _Tr;
     }
+    
+    
     public override void Enter()
     {
          pointPosition  = GlobalPatrolPoints.patrolPoints[Random.Range(0,GlobalPatrolPoints.patrolPoints.Count)];
          Debug.Log("SearchState Enter");
     }    
-    public override void Update() => Search();
     
+    
+    public override void Update() => Search();
+   
     private void Search()
     {
         if (_Tr.position.x == pointPosition.x || _Tr.position.y == pointPosition.y)
@@ -33,5 +38,6 @@ public class SearchState : State
         {
             _controller.target = pointPosition;
         }
+        
     }
 }

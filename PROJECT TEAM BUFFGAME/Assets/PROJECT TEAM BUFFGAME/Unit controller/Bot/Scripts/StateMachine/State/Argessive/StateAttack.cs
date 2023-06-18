@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using Mirror;
 public class StateAttack : State
 {
       private readonly Transform _Tr;
@@ -19,17 +19,19 @@ public class StateAttack : State
         this.bot = bot;
         this.MinDistansAttack = MinDistansAttack;
      }
+     
     public override void Update()
     {
         if(bot._distant > MinDistansAttack) stateMachine.SetState<StateAggression>();
         else Attacka();
     }
-
+     
     void Attacka()
     {
          var pos = purpose.position - _Tr.position;
         _forvat  = Mathf.Atan2(pos.x,pos.y) * Mathf.Rad2Deg * -1;
         _Tr.rotation = Quaternion.Euler(0,0,_forvat);
-        Debug.Log("Attack");
+        purpose.gameObject.GetComponent<UnitHealth>().TakeDamage(1);
+     
     }
 }

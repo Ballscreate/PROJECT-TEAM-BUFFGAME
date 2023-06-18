@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using Mirror;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerInput : NetworkBehaviour
 {
     private Vector2
         _input,
@@ -16,8 +17,10 @@ public class PlayerInput : MonoBehaviour
 
     private Transform _unit;
 
-    void Start()
-    {
+
+    public  void Start()
+    {   
+        if(!isLocalPlayer) return;
         _unit = transform;
         _camMain = Camera.main; // находит камеру по тегу
         _controller = GetComponent<UnitController>();
@@ -25,6 +28,7 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
+        if(!isLocalPlayer) return;
         input();
         control();
     }
@@ -43,7 +47,7 @@ public class PlayerInput : MonoBehaviour
         if (_input.magnitude > 0)
         {
             _inputLocal.x = _input.x * -_cos + _input.y * _sin;
-            _inputLocal.y = _input.x * _sin + _input.y * _cos;
+            _inputLocal.y = _input.x * _sin + _input.y *  _cos;
         }
     }
 
