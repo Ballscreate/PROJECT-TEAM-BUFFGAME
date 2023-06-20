@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Mirror;
 
-public class UnitHealth : MonoBehaviour
+public class UnitHealth : NetworkBehaviour
 {
    public Action<float> HealthChange;
 
@@ -32,7 +32,10 @@ public class UnitHealth : MonoBehaviour
         }
         set
         {
-          if(value <= MaxHealth) _health =  Mathf.Clamp(value,0,_maxHealth);
+          if(value <= MaxHealth) 
+          {
+            _health =  Mathf.Clamp(value,0,MaxHealth);
+          }
         }
     }
     
@@ -40,15 +43,18 @@ public class UnitHealth : MonoBehaviour
     {
         Healths = MaxHealth;
     }    
-   
+   [Server]
     public void TakeDamage(float damage)
     {
         if(damage <= 0)  return;
         
-        Healths -= damage;
-        HealthChange?.Invoke(Healths);
-
-        Debug.Log(damage);
+         Healths -= damage;
+         HealthChange?.Invoke(Healths);
+    }
+    [Command]
+    public void CmdTakeDamage(float damage)
+    {
+        TakeDamage(damage);
     }
 
     

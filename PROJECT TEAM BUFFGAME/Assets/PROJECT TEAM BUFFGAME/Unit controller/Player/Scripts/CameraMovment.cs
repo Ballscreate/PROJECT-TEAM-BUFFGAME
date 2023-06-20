@@ -18,8 +18,6 @@ public class CameraMovment : NetworkBehaviour
   }
   public void CameraMovmentToPlayer()
   {
-   _playerCam.transform.position = new Vector3(transform.position.x,transform.position.y + 5,-10);
-   
-  
+   _playerCam.transform.position = new Vector3(transform.position.x,transform.position.y + 5,-10);  
   }
 }

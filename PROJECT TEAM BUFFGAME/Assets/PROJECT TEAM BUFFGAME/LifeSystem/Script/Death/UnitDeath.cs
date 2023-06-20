@@ -1,7 +1,6 @@
 using System;
-using UnityEngine;
-
-public abstract class UnitDeath : MonoBehaviour
+using Mirror;
+public abstract class UnitDeath : NetworkBehaviour
 {
     
     public Action OnDeath;
@@ -14,19 +13,20 @@ public abstract class UnitDeath : MonoBehaviour
     private void OnEnable() {
         
         _healthObject.HealthChange += СheckDeathObject;
-        OnDeath +=  DeathLogic;
+         OnDeath +=  DeathLogic;
     }
     private void OnDisable() {
         _healthObject.HealthChange -= СheckDeathObject;
-        OnDeath -=  DeathLogic;
+         OnDeath -=  DeathLogic;
     }
+    [Client]
     private void СheckDeathObject(float health)
-    {
         if(health <= 0)
         {
            OnDeath?.Invoke();
         }
     }
+
     
     protected abstract void DeathLogic();
 }

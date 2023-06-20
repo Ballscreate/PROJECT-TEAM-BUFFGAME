@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using Mirror;
 
 public class TastBotLogic : NetworkBehaviour
@@ -9,21 +7,24 @@ public class TastBotLogic : NetworkBehaviour
     [Header("State")]
     protected StateMachine stateMachine;
 
+
     [Header("Transform/Point")]
     protected Transform _Tr;
 
+
     [Header("GameObject")]
     protected List<GameObject> _purposes = new();
+
     
     [Header("Other Variables")]
     [SerializeField] protected float MinDistansTarget;
     [SerializeField] protected float MinDistansAttack;
     [SerializeField] protected Vector2 SizePatrol;
-
     public float _distant;
-
     protected TastBotLogic _botScript;
     protected UnitController _controller;
+
+
     [Server]
     protected void TastBotLogicStart()
     {
@@ -50,9 +51,7 @@ public class TastBotLogic : NetworkBehaviour
         if(other.CompareTag("Player"))
         {
             _purposes.Add(other.gameObject);
-            
-           
-            stateMachine.AddState(new StateAggression(stateMachine,_controller,_Tr, _purposes[0].transform,_botScript,MinDistansAttack));
+            stateMachine.AddState(new StateAggression(stateMachine,_controller,_Tr, ref _purposes,_botScript,MinDistansAttack));
             stateMachine.SetState<StateAggression>();
         }    
     }
@@ -61,12 +60,9 @@ public class TastBotLogic : NetworkBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            _purposes.Remove(other.gameObject);
            stateMachine.SetState<StatePatrul>();
         }    
-    }
-    protected virtual void RemovePurpose()
-    {
-        _purposes.RemoveAt(0);
     }
     
 

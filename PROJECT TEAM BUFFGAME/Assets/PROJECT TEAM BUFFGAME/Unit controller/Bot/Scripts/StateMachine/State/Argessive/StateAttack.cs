@@ -1,10 +1,10 @@
 using UnityEngine;
-using Mirror;
+using System.Collections.Generic;
+
 public class StateAttack : State
 {
       private readonly Transform _Tr;
-      private readonly Transform purpose;
-
+      private readonly List<GameObject> purpose;
       private readonly TastBotLogic bot;
       
       private float _forvat;
@@ -12,7 +12,7 @@ public class StateAttack : State
 
    
       
-     public StateAttack(StateMachine stateMachine,Transform _Tr, Transform purpose,TastBotLogic bot,float MinDistansAttack) : base(stateMachine)
+     public StateAttack(StateMachine stateMachine,Transform _Tr, List<GameObject> purpose,TastBotLogic bot,float MinDistansAttack) : base(stateMachine)
      {
         this._Tr = _Tr;
         this.purpose = purpose;
@@ -28,10 +28,10 @@ public class StateAttack : State
      
     void Attacka()
     {
-         var pos = purpose.position - _Tr.position;
+         var pos = purpose[0].transform.position - _Tr.position;
         _forvat  = Mathf.Atan2(pos.x,pos.y) * Mathf.Rad2Deg * -1;
         _Tr.rotation = Quaternion.Euler(0,0,_forvat);
-        purpose.gameObject.GetComponent<UnitHealth>().TakeDamage(1);
+        purpose[0].gameObject.GetComponent<UnitHealth>().TakeDamage(1);
      
     }
 }

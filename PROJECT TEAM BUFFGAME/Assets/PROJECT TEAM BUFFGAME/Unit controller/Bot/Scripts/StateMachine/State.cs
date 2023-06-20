@@ -1,5 +1,5 @@
-using Mirror;
-public abstract class State 
+
+public abstract class State
 {
     protected readonly StateMachine stateMachine;
 
@@ -11,6 +11,6 @@ public abstract class State
     public virtual void Enter() => UnityEngine.Debug.Log($"Enter {this.GetType().Name}");
    
     public virtual void Exit() => UnityEngine.Debug.Log($"Exit {this.GetType().Name}");
-   
+    
     public virtual void Update(){}
 }

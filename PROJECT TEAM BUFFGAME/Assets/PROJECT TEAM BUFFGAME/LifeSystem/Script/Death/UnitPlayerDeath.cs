@@ -1,12 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Mirror;
 
 public class UnitPlayerDeath : UnitDeath
 {
+    [Server]
     protected override void DeathLogic()
     {
-        gameObject.SetActive(false);
-        OnDeath?.Invoke();
+        RcpDeathLogic();
+        NetworkServer.Destroy(gameObject.GetComponentInParent<NetworkIdentity>().gameObject);
+        OnDeath?.Invoke();   
+    }
+
+    [TargetRpc]
+    public void RcpDeathLogic()
+    {
+        DeathLogic();
     }
 }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using Mirror;
 
 public class StatePatrul : State
 {
@@ -13,9 +12,8 @@ public class StatePatrul : State
     
     public override void Enter()
     {
-         
-        Debug.Log("Patrul State Enter");
         stateMachine.AddState(new SearchState(stateMachine,_controller,_Tr));
+        base.Enter();
     }
    
     public override void Update()
